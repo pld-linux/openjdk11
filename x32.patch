@@ -40,7 +40,7 @@
 +    case "$host" in *x32) MACHINE_FLAG=;; esac
    fi
  
-   # FIXME: global flags are not used yet...
+   if test "x$OPENJDK_TARGET_OS" = xmacosx; then
 @@ -328,11 +329,8 @@ AC_DEFUN([FLAGS_SETUP_TOOLCHAIN_CONTROL]
    AC_SUBST(COMPILER_COMMAND_FILE_FLAG)
    AC_SUBST(COMPILER_BINDCMD_FILE_FLAG)
