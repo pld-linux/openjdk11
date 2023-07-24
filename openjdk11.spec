@@ -58,7 +58,7 @@ BuildRequires:	lsb-release
 BuildRequires:	pcsc-lite-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	unzip
 BuildRequires:	util-linux
 BuildRequires:	xorg-lib-libX11-devel
@@ -109,6 +109,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # openjdk build system handles _FORTIFY_SOURCE internally
 %undefine	_fortify_cflags
+
+%if %{_ver_ge %(rpm -q --qf='%%{VERSION}' gcc) 12}
+%ifarch %arm32_with_neon
+%define		specflags_arm	-fno-tree-vectorize
+%endif
+%endif
 
 %description
 Open-source implementation of the Java Platform, Standard Edition.
