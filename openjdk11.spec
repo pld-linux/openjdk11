@@ -25,16 +25,17 @@
 Summary:	Open-source implementation of the Java Platform, Standard Edition
 Summary(pl.UTF-8):	Wolnoźródłowa implementacja Java 11 SE
 Name:		openjdk11
-Version:	11.0.28
+Version:	11.0.29
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	https://github.com/openjdk/jdk11u/archive/jdk-%{version}-ga/%{name}-%{version}.tar.gz
-# Source0-md5:	cbe3903ca134e44ada85b274dc28df1d
+# Source0-md5:	7db5acf3b57b25f9703468ca2b84dddd
 Source10:	make-cacerts.sh
 Patch0:		libpath.patch
 Patch1:		x32.patch
 Patch2:		no_optflags.patch
+Patch3:		glibc-2.42.patch
 URL:		http://openjdk.java.net/
 BuildRequires:	/usr/bin/jar
 BuildRequires:	alsa-lib-devel
@@ -346,6 +347,7 @@ Przykłady dla OpenJDK.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -371,7 +373,7 @@ chmod a+x configure
 %configure \
 	%{?with_zero:--with-jvm-variants=zero} \
 	--with-boot-jdk="%{java_home}" \
-	--with-extra-cflags="%{rpmcppflags} %{rpmcflags}" \
+	--with-extra-cflags="%{rpmcppflags} %{rpmcflags} -std=c99" \
 	--with-extra-cxxflags="%{rpmcppflags} %{rpmcxxflags}" \
 	--with-extra-ldflags="%{rpmldflags}" \
 	--with-jvm-features="%{?with_shenandoahgc:shenandoahgc}" \
