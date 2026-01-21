@@ -25,17 +25,16 @@
 Summary:	Open-source implementation of the Java Platform, Standard Edition
 Summary(pl.UTF-8):	Wolnoźródłowa implementacja Java 11 SE
 Name:		openjdk11
-Version:	11.0.29
+Version:	11.0.30
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	https://github.com/openjdk/jdk11u/archive/jdk-%{version}-ga/%{name}-%{version}.tar.gz
-# Source0-md5:	7db5acf3b57b25f9703468ca2b84dddd
+# Source0-md5:	e2775ad0976f5aa211561aec7ec6b0b4
 Source10:	make-cacerts.sh
 Patch0:		libpath.patch
 Patch1:		x32.patch
 Patch2:		no_optflags.patch
-Patch3:		glibc-2.42.patch
 URL:		http://openjdk.java.net/
 BuildRequires:	/usr/bin/jar
 BuildRequires:	alsa-lib-devel
@@ -347,7 +346,6 @@ Przykłady dla OpenJDK.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
-%patch -P3 -p1
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
