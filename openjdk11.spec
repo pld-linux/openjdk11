@@ -25,12 +25,12 @@
 Summary:	Open-source implementation of the Java Platform, Standard Edition
 Summary(pl.UTF-8):	Wolnoźródłowa implementacja Java 11 SE
 Name:		openjdk11
-Version:	11.0.31
-Release:	2
+Version:	11.0.32
+Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	https://github.com/openjdk/jdk11u/archive/jdk-%{version}-ga/%{name}-%{version}.tar.gz
-# Source0-md5:	55d07fa085c72b8cdaf186121f0c5413
+# Source0-md5:	f7b5af91146fa9ed8451a8cee4cb3e6d
 Source10:	make-cacerts.sh
 Patch0:		libpath.patch
 Patch1:		x32.patch
