@@ -25,21 +25,24 @@
 Summary:	Open-source implementation of the Java Platform, Standard Edition
 Summary(pl.UTF-8):	Wolnoźródłowa implementacja Java 11 SE
 Name:		openjdk11
-Version:	11.0.32
+Version:	11.0.32.1
 Release:	1
 License:	GPL v2
 Group:		Development/Languages/Java
 Source0:	https://github.com/openjdk/jdk11u/archive/jdk-%{version}-ga/%{name}-%{version}.tar.gz
-# Source0-md5:	f7b5af91146fa9ed8451a8cee4cb3e6d
+# Source0-md5:	deb0fd6a09a79fe1faebdb7700256c29
 Source10:	make-cacerts.sh
 Patch0:		libpath.patch
 Patch1:		x32.patch
 Patch2:		no_optflags.patch
+Patch3:		openjdk-CVE-2026-114820.patch
+Patch4:		openjdk-CVE-2026-91403-blocklist.patch
 URL:		http://openjdk.java.net/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
 BuildRequires:	bash
-%{?with_cacerts:BuildRequires:	ca-certificates-update}
+# cacerts is generated from it; 20260816-1 drops the compromised eMudhra roots (CVE-2026-114820)
+%{?with_cacerts:BuildRequires:	ca-certificates-update >= 20260816-1}
 BuildRequires:	cups-devel
 BuildRequires:	elfutils-devel
 BuildRequires:	fontconfig-devel
@@ -353,6 +356,8 @@ Przykłady dla OpenJDK.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
+%patch -P4 -p1
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
